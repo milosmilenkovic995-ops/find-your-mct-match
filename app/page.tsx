@@ -26,11 +26,11 @@ const products = {
   cacaoCoffee: {
     id: "cacaoCoffee",
     name: "Cognitive Cacao & Coffee Blend",
-    subtitle: "Rich • Functional Drink",
+    subtitle: "Rich • Ready-to-Mix Drink",
     description:
-      "A flavored drink option for people who want a more enjoyable and functional part of their morning routine.",
+      "A flavored drink option for people who want a richer, more enjoyable part of their morning routine.",
     image: "/images/cognitive-cacao-and-coffee.png",
-    badges: ["Rich Taste", "Morning Routine", "Functional Blend"],
+    badges: ["Rich Taste", "Morning Routine", "Ready to Mix"],
     href: "https://www.znaturalfoods.com/products/cognitive-cacao-and-coffee-blend-organic",
   },
 };
@@ -75,7 +75,7 @@ const resultRecipes = {
       ],
     },
     {
-      title: "MCT Energy Bites",
+      title: "MCT Snack Bites",
       image:
         "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1200&q=80",
       time: "15 min",
@@ -210,33 +210,33 @@ const resultRecipes = {
 const questions = [
   {
     id: "goal",
-    title: "What are you hoping to support in your routine?",
+    title: "What kind of product are you most interested in?",
     answers: [
       {
-        id: "everyday-energy",
-        title: "Everyday vitality",
-        desc: "A natural fit for steadier daily energy support",
+        id: "simple-everyday",
+        title: "Something simple for everyday use",
+        desc: "Easy to work into my regular routine",
         icon: "⚡",
         score: { mctOil: 2, collagenCreamer: 1, cacaoCoffee: 1 },
       },
       {
-        id: "focus",
-        title: "Mental clarity",
-        desc: "A better match for focus-driven mornings",
+        id: "enjoyable-morning",
+        title: "A more enjoyable morning option",
+        desc: "Something I will actually look forward to",
         icon: "🧠",
         score: { cacaoCoffee: 3, collagenCreamer: 1 },
       },
       {
-        id: "wellness",
-        title: "Overall wellness",
-        desc: "A nourishing option for everyday balance",
+        id: "overall-routine",
+        title: "Something that fits my overall routine",
+        desc: "Flexible and easy to use in different ways",
         icon: "💚",
         score: { mctOil: 2, collagenCreamer: 2 },
       },
       {
-        id: "fitness",
-        title: "Active lifestyle support",
-        desc: "A stronger fit for movement and active days",
+        id: "active-lifestyle",
+        title: "Something that fits an active lifestyle",
+        desc: "A good match for busy or training days",
         icon: "💪",
         score: { collagenCreamer: 2, mctOil: 1, cacaoCoffee: 1 },
       },
@@ -247,30 +247,30 @@ const questions = [
     title: "What matters most to you right now?",
     answers: [
       {
-        id: "steady-energy",
-        title: "Steady energy support",
-        desc: "A natural way to support more consistent days",
+        id: "easy-routine",
+        title: "Easy to use day to day",
+        desc: "Something simple I can use consistently",
         icon: "⚡",
         score: { mctOil: 2, collagenCreamer: 1 },
       },
       {
-        id: "mental-clarity",
-        title: "Calm focus",
-        desc: "A better fit for clear, productive mornings",
+        id: "morning-experience",
+        title: "A better morning experience",
+        desc: "A more enjoyable fit for my mornings",
         icon: "🧠",
         score: { cacaoCoffee: 3 },
       },
       {
-        id: "overall-wellness",
-        title: "Whole-body wellness",
-        desc: "A flexible addition to a health-conscious routine",
+        id: "flexible-option",
+        title: "A flexible option",
+        desc: "Something that fits easily into my routine",
         icon: "💚",
         score: { mctOil: 2, collagenCreamer: 1 },
       },
       {
-        id: "recovery",
-        title: "Performance support",
-        desc: "A good match for active, demanding lifestyles",
+        id: "busy-lifestyle",
+        title: "A fit for busy days",
+        desc: "Something that works with an active schedule",
         icon: "💪",
         score: { collagenCreamer: 2, mctOil: 1 },
       },
@@ -295,8 +295,8 @@ const questions = [
         score: { collagenCreamer: 3 },
       },
       {
-        id: "functional-drink",
-        title: "A rich functional drink",
+        id: "flavored-drink",
+        title: "A rich flavored drink",
         desc: "A more enjoyable option with a flavored profile",
         icon: "🍫",
         score: { cacaoCoffee: 3 },
@@ -317,7 +317,7 @@ const questions = [
       {
         id: "whole-foods",
         title: "Whole foods focused",
-        desc: "I prefer products that fit a cleaner routine",
+        desc: "I prefer products that fit a simpler routine",
         icon: "🥗",
         score: { mctOil: 2, collagenCreamer: 1 },
       },
@@ -329,9 +329,9 @@ const questions = [
         score: { collagenCreamer: 2, cacaoCoffee: 1 },
       },
       {
-        id: "just-healthier",
-        title: "Just trying to eat better",
-        desc: "I am looking for an easy place to start",
+        id: "just-starting",
+        title: "Just looking for an easy place to start",
+        desc: "I want something simple and approachable",
         icon: "🙂",
         score: { collagenCreamer: 1, cacaoCoffee: 1, mctOil: 1 },
       },
@@ -637,7 +637,7 @@ function ProductCard({
         src={product.image}
         alt={product.name}
         className={`mx-auto mb-5 w-full object-contain ${
-          featured ? "max-w-md h-80" : "h-48 max-w-xs"
+          featured ? "h-80 max-w-md" : "h-48 max-w-xs"
         }`}
       />
       <h3
@@ -767,7 +767,7 @@ export default function Page() {
 
       if (!res.ok || !data.success) {
         console.error("Subscribe failed:", data);
-        alert("Email was not sent to Klaviyo. Check console / API response.");
+        alert(data?.error || "Email was not sent to Klaviyo.");
         setSubmitting(false);
         return;
       }
@@ -779,14 +779,6 @@ export default function Page() {
     } finally {
       setSubmitting(false);
     }
-  };
-
-  const resetQuiz = () => {
-    setStep(1);
-    setAnswers({});
-    setFirstName("");
-    setEmail("");
-    setEmailError(false);
   };
 
   return (
@@ -834,14 +826,6 @@ export default function Page() {
               <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-gray-500">
                 Based on your answers, here is the product that fits your routine best.
               </p>
-              <div className="mt-5 flex items-center justify-center gap-3">
-                <button
-                  onClick={resetQuiz}
-                  className="rounded-xl border border-gray-300 bg-white px-4 py-3 font-semibold"
-                >
-                  Restart Preview
-                </button>
-              </div>
             </div>
 
             <div className="mx-auto mb-8 max-w-4xl">
